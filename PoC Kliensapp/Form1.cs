@@ -28,11 +28,14 @@ namespace PoC_Kliensapp
 
         public void GetProducts()
         {
+            // get the current scrollbar position
+            int scrollPosition = productDataGridView.FirstDisplayedScrollingRowIndex;
+
+            // your existing code to fetch and populate the DataGridView
             string url = "http://20.234.113.211:8095/";
             string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
 
             Api proxy = new Api(url, key);
-
 
             ApiResponse<List<ProductDTO>> response = proxy.ProductsFindAll();
             string json = JsonConvert.SerializeObject(response);
@@ -40,7 +43,7 @@ namespace PoC_Kliensapp
             ApiResponse<List<ProductDTO>> deserializedResponse = JsonConvert.DeserializeObject<ApiResponse<List<ProductDTO>>>(json);
 
             DataTable dt = new DataTable();
-            
+
             dt.Columns.Add("Bvin", typeof(string));
             dt.Columns.Add("Sku", typeof(string));
             dt.Columns.Add("ProductName", typeof(string));
@@ -49,16 +52,21 @@ namespace PoC_Kliensapp
 
             foreach (ProductDTO item in deserializedResponse.Content)
             {
-                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice,item.LongDescription );
+                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice, item.LongDescription);
             }
 
             // save the selected row index and row count
             int selectedRowIndex = productDataGridView.CurrentRow != null ? productDataGridView.CurrentRow.Index : 0;
             int rowCount = productDataGridView.Rows.Count;
+
+            // set the DataSource and restore the scrollbar position
             productDataGridView.DataSource = dt;
+            if (scrollPosition != -1)
+            {
+                productDataGridView.FirstDisplayedScrollingRowIndex = scrollPosition;
+            }
 
             // restore the selected row index if the DataGridView has rows
-
             if (rowCount > 0)
             {
                 int indexToSelect = Math.Min(selectedRowIndex, productDataGridView.Rows.Count - 1);
@@ -71,27 +79,27 @@ namespace PoC_Kliensapp
         {
             if (MessageBox.Show("Biztos", "Biztos", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
+                // get the current scrollbar position
+                int scrollPosition = productDataGridView.FirstDisplayedScrollingRowIndex;
+
+                // your existing code to delete the selected row
                 string url = "http://20.234.113.211:8095/";
                 string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
 
                 Api proxy = new Api(url, key);
-
 
                 int rowIndex = productDataGridView.CurrentCell.RowIndex;
                 int selectedRowIndex = productDataGridView.CurrentRow.Index;
                 // get the productId from the first column of the selected row
                 var productId = productDataGridView.Rows[rowIndex].Cells[0].Value.ToString();
 
-                
-
-
                 ApiResponse<bool> response = proxy.ProductsDelete(productId);
 
-                // remove the selected row from the DataGridView
-                productDataGridView.Rows.RemoveAt(rowIndex);
+                // restore the scrollbar position and refresh the DataGridView
                 GetProducts();
-            }
                 
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -134,7 +142,7 @@ namespace PoC_Kliensapp
                     break;
                 }
             }
-
+            
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
