@@ -59,7 +59,7 @@ namespace PoC_Kliensapp
         {
             if (MessageBox.Show("Biztos", "Biztos", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                string url = "http://20.234.113.211:8095/;
+                string url = "http://20.234.113.211:8095/";
                 string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
 
                 Api proxy = new Api(url, key);
@@ -93,20 +93,19 @@ namespace PoC_Kliensapp
             // call the API to find the product to update
             var product = proxy.ProductsFind(productId).Content;
 
-            // update one or more properties of the product
-            if (string.IsNullOrEmpty(textBox1.Text))
+            // validate the input
+            if (string.IsNullOrEmpty(textBox1.Text) || decimal.Parse(textBox1.Text) == 0)
             {
+                MessageBox.Show("Érvénytelen érték. Kérjük adjon meg egy nem 0 számot.");
                 return;
             }
-            else
-            {
-                product.SitePrice = decimal.Parse(textBox1.Text);
-            }
-            
+
+            // update the SitePrice property of the product
+            product.SitePrice = decimal.Parse(textBox1.Text);
 
             // call the API to update the product
             ApiResponse<ProductDTO> response = proxy.ProductsUpdate(product);
-
+            textBox1.Clear();
             GetProducts();
         }
 
