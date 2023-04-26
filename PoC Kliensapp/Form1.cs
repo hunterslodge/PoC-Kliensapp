@@ -27,8 +27,8 @@ namespace PoC_Kliensapp
 
         public void GetProducts()
         {
-            string url = "http://www.dnndev.me";
-            string key = "1-04ef5d8f-9490-4c54-b45a-a449865431cf";
+            string url = "http://20.234.113.211:8095/";
+            string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
 
             Api proxy = new Api(url, key);
 
@@ -59,8 +59,8 @@ namespace PoC_Kliensapp
         {
             if (MessageBox.Show("Biztos", "Biztos", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                string url = "http://www.dnndev.me";
-                string key = "1-04ef5d8f-9490-4c54-b45a-a449865431cf";
+                string url = "http://20.234.113.211:8095/;
+                string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
 
                 Api proxy = new Api(url, key);
 
@@ -80,8 +80,8 @@ namespace PoC_Kliensapp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string url = "http://www.dnndev.me";
-            string key = "YOUR-API-KEY";
+            string url = "http://20.234.113.211:8095/";
+            string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
 
             Api proxy = new Api(url, key);
 
@@ -106,6 +106,8 @@ namespace PoC_Kliensapp
 
             // call the API to update the product
             ApiResponse<ProductDTO> response = proxy.ProductsUpdate(product);
+
+            GetProducts();
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
