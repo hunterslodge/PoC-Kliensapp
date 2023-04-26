@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Hotcakes.CommerceDTO.v1.Client;
 using Hotcakes.CommerceDTO.v1.Contacts;
 using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.Web.Data;
 
 
 namespace PoC_Kliensapp
@@ -57,7 +58,7 @@ namespace PoC_Kliensapp
             productDataGridView.DataSource = dt;
 
             // restore the selected row index if the DataGridView has rows
-            productDataGridView.CurrentCell = null;
+
             if (rowCount > 0)
             {
                 int indexToSelect = Math.Min(selectedRowIndex, productDataGridView.Rows.Count - 1);
@@ -101,8 +102,7 @@ namespace PoC_Kliensapp
             Api proxy = new Api(url, key);
 
             int rowIndex = productDataGridView.CurrentCell.RowIndex;
-            int columnIndex = productDataGridView.CurrentCell.ColumnIndex;
-            int selectedRowIndex = productDataGridView.CurrentRow.Index;
+            
             // get the ID of the selected product from the first column of the same row
             var productId = productDataGridView.Rows[rowIndex].Cells["Bvin"].Value.ToString();
 
@@ -115,7 +115,8 @@ namespace PoC_Kliensapp
                 MessageBox.Show("Érvénytelen érték. Kérjük adjon meg egy nem 0 számot.");
                 return;
             }
-
+            
+     
             // update the SitePrice property of the product
             product.SitePrice = decimal.Parse(textBox1.Text);
 
@@ -123,6 +124,17 @@ namespace PoC_Kliensapp
             ApiResponse<ProductDTO> response = proxy.ProductsUpdate(product);
             textBox1.Clear();
             GetProducts();
+            // find the edited row by the product ID
+            foreach (DataGridViewRow row in productDataGridView.Rows)
+            {
+                if (row.Cells["Bvin"].Value.ToString() == productId)
+                {
+                    // highlight the row
+                    row.Selected = true;
+                    break;
+                }
+            }
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
