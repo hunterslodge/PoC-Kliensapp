@@ -40,16 +40,18 @@
             // 
             this.productDataGridView.AllowUserToAddRows = false;
             this.productDataGridView.AllowUserToDeleteRows = false;
+            this.productDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.productDataGridView.Location = new System.Drawing.Point(65, 52);
             this.productDataGridView.Name = "productDataGridView";
             this.productDataGridView.ReadOnly = true;
-            this.productDataGridView.Size = new System.Drawing.Size(677, 309);
+            this.productDataGridView.Size = new System.Drawing.Size(1015, 509);
             this.productDataGridView.TabIndex = 0;
             // 
             // Törlés
             // 
-            this.Törlés.Location = new System.Drawing.Point(65, 384);
+            this.Törlés.Location = new System.Drawing.Point(65, 572);
             this.Törlés.Name = "Törlés";
             this.Törlés.Size = new System.Drawing.Size(75, 23);
             this.Törlés.TabIndex = 1;
@@ -59,8 +61,10 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(479, 384);
+            this.label1.Location = new System.Drawing.Point(455, 577);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 13);
             this.label1.TabIndex = 2;
@@ -68,14 +72,17 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(561, 383);
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(537, 575);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.Size = new System.Drawing.Size(438, 20);
             this.textBox1.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(667, 382);
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(1002, 573);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -87,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1138, 622);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
