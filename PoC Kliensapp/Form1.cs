@@ -94,10 +94,26 @@ namespace PoC_Kliensapp
             var product = proxy.ProductsFind(productId).Content;
 
             // update one or more properties of the product
-            product.SitePrice = decimal.Parse(textBox1.Text);
+            if (string.IsNullOrEmpty(textBox1.Text))
+            {
+                return;
+            }
+            else
+            {
+                product.SitePrice = decimal.Parse(textBox1.Text);
+            }
+            
 
             // call the API to update the product
             ApiResponse<ProductDTO> response = proxy.ProductsUpdate(product);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Biztos", "Biztos", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
