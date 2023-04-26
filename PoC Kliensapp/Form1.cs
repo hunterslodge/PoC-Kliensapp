@@ -1,5 +1,4 @@
-﻿using Hotcakes.CommerceDTO.v1.Orders;
-using Hotcakes.CommerceDTO.v1;
+﻿using Hotcakes.CommerceDTO.v1;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,11 +10,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Hotcakes.CommerceDTO.v1;
 using Hotcakes.CommerceDTO.v1.Client;
 using Hotcakes.CommerceDTO.v1.Contacts;
 using Hotcakes.CommerceDTO.v1.Catalog;
-using Newtonsoft.Json;
+
 
 namespace PoC_Kliensapp
 {
@@ -24,6 +22,7 @@ namespace PoC_Kliensapp
         public Form1()
         {
             InitializeComponent();
+            GetProducts();  
         }
 
         public void GetProducts()
@@ -44,15 +43,61 @@ namespace PoC_Kliensapp
             dt.Columns.Add("Bvin", typeof(string));
             dt.Columns.Add("Sku", typeof(string));
             dt.Columns.Add("ProductName", typeof(string));
-            dt.Columns.Add("ListPrice", typeof(long));
+            dt.Columns.Add("SitePrice", typeof(long));
             dt.Columns.Add("LongDescription", typeof(string));
 
             foreach (ProductDTO item in deserializedResponse.Content)
             {
-                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.ListPrice,item.LongDescription );
+                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice,item.LongDescription );
             }
 
             productDataGridView.DataSource = dt;
+        }
+
+
+        private void Törlés_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Biztos", "Biztos", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                string url = "http://www.dnndev.me";
+                string key = "1-04ef5d8f-9490-4c54-b45a-a449865431cf";
+
+                Api proxy = new Api(url, key);
+
+
+                int rowIndex = productDataGridView.CurrentCell.RowIndex;
+                int columnIndex = productDataGridView.CurrentCell.ColumnIndex;
+
+                var productId = productDataGridView[columnIndex, rowIndex].Value.ToString();
+
+
+                ApiResponse<bool> response = proxy.ProductsDelete(productId);
+
+                GetProducts();
+            }
+                
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string url = "http://www.dnndev.me";
+            string key = "YOUR-API-KEY";
+
+            Api proxy = new Api(url, key);
+
+            int rowIndex = productDataGridView.CurrentCell.RowIndex;
+            int columnIndex = productDataGridView.CurrentCell.ColumnIndex;
+            // specify the product to look for
+            var productId = productDataGridView[columnIndex, rowIndex].Value.ToString();
+
+            // call the API to find the product to update
+            var product = proxy.ProductsFind(productId).Content;
+
+            // update one or more properties of the product
+            product.SitePrice = decimal.Parse(textBox1.Text);
+
+            // call the API to update the product
+            ApiResponse<ProductDTO> response = proxy.ProductsUpdate(product);
         }
     }
 }
