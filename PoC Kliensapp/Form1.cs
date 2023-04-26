@@ -51,7 +51,18 @@ namespace PoC_Kliensapp
                 dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice,item.LongDescription );
             }
 
+            // save the selected row index and row count
+            int selectedRowIndex = productDataGridView.CurrentRow != null ? productDataGridView.CurrentRow.Index : 0;
+            int rowCount = productDataGridView.Rows.Count;
             productDataGridView.DataSource = dt;
+
+            // restore the selected row index if the DataGridView has rows
+            productDataGridView.CurrentCell = null;
+            if (rowCount > 0)
+            {
+                int indexToSelect = Math.Min(selectedRowIndex, productDataGridView.Rows.Count - 1);
+                productDataGridView.CurrentCell = productDataGridView.Rows[indexToSelect].Cells[0];
+            }
         }
 
 
@@ -66,13 +77,17 @@ namespace PoC_Kliensapp
 
 
                 int rowIndex = productDataGridView.CurrentCell.RowIndex;
-                int columnIndex = productDataGridView.CurrentCell.ColumnIndex;
+                int selectedRowIndex = productDataGridView.CurrentRow.Index;
+                // get the productId from the first column of the selected row
+                var productId = productDataGridView.Rows[rowIndex].Cells[0].Value.ToString();
 
-                var productId = productDataGridView[columnIndex, rowIndex].Value.ToString();
+                
 
 
                 ApiResponse<bool> response = proxy.ProductsDelete(productId);
 
+                // remove the selected row from the DataGridView
+                productDataGridView.Rows.RemoveAt(rowIndex);
                 GetProducts();
             }
                 
@@ -87,8 +102,9 @@ namespace PoC_Kliensapp
 
             int rowIndex = productDataGridView.CurrentCell.RowIndex;
             int columnIndex = productDataGridView.CurrentCell.ColumnIndex;
-            // specify the product to look for
-            var productId = productDataGridView[columnIndex, rowIndex].Value.ToString();
+            int selectedRowIndex = productDataGridView.CurrentRow.Index;
+            // get the ID of the selected product from the first column of the same row
+            var productId = productDataGridView.Rows[rowIndex].Cells["Bvin"].Value.ToString();
 
             // call the API to find the product to update
             var product = proxy.ProductsFind(productId).Content;
