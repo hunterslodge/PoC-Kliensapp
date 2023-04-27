@@ -50,18 +50,24 @@ namespace PoC_Kliensapp
             dt.Columns.Add("SitePrice", typeof(long));
             dt.Columns.Add("CreationDateUtc", typeof(DateTime));
 
+
             productDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
             foreach (ProductDTO item in deserializedResponse.Content)
             {
                 dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice, item.CreationDateUtc);
             }
-
+            
             // save the selected row index and row count
             int selectedRowIndex = productDataGridView.CurrentRow != null ? productDataGridView.CurrentRow.Index : 0;
             int rowCount = productDataGridView.Rows.Count;
 
             // set the DataSource and restore the scrollbar position
             productDataGridView.DataSource = dt;
+            
+            
+
             if (scrollPosition != -1)
             {
                 productDataGridView.FirstDisplayedScrollingRowIndex = scrollPosition;
