@@ -50,6 +50,9 @@ namespace PoC_Kliensapp
             dt.Columns.Add("SitePrice", typeof(long));
             dt.Columns.Add("LongDescription", typeof(string));
 
+            // Set the column width mode to Fill for Sku and ProductName columns
+            productDataGridView.Columns["Sku"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            productDataGridView.Columns["ProductName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             foreach (ProductDTO item in deserializedResponse.Content)
             {
                 dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice, item.LongDescription);
