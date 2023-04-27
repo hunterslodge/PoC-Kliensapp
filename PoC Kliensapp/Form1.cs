@@ -48,14 +48,12 @@ namespace PoC_Kliensapp
             dt.Columns.Add("Sku", typeof(string));
             dt.Columns.Add("ProductName", typeof(string));
             dt.Columns.Add("SitePrice", typeof(long));
-            dt.Columns.Add("LongDescription", typeof(string));
+            dt.Columns.Add("CreationDateUtc", typeof(DateTime));
 
-            // Set the column width mode to Fill for Sku and ProductName columns
-            productDataGridView.Columns["Sku"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            productDataGridView.Columns["ProductName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            productDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             foreach (ProductDTO item in deserializedResponse.Content)
             {
-                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice, item.LongDescription);
+                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice, item.CreationDateUtc);
             }
 
             // save the selected row index and row count
