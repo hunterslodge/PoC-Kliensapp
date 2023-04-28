@@ -24,7 +24,6 @@ namespace PoC_Kliensapp
         {
             InitializeComponent();
             GetProducts();
-            // align headers to the middle of the DataGridView
             foreach (DataGridViewColumn column in productDataGridView.Columns)
             {
                 column.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;

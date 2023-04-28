@@ -34,22 +34,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hotcakes.Commerce">
-      <HintPath>..\..\test\Test\References\Hotcakes.Commerce.dll</HintPath>
+      <HintPath>D:\CORVINUS\github file\ApiSample_03.06.00\References\Hotcakes.Commerce.dll</HintPath>
     </Reference>
     <Reference Include="Hotcakes.Commerce.Dnn">
-      <HintPath>..\..\test\Test\References\Hotcakes.Commerce.Dnn.dll</HintPath>
+      <HintPath>D:\CORVINUS\github file\ApiSample_03.06.00\References\Hotcakes.Commerce.Dnn.dll</HintPath>
     </Reference>
     <Reference Include="Hotcakes.CommerceDTO">
-      <HintPath>..\..\test\Test\References\Hotcakes.CommerceDTO.dll</HintPath>
+      <HintPath>D:\CORVINUS\github file\ApiSample_03.06.00\References\Hotcakes.CommerceDTO.dll</HintPath>
     </Reference>
     <Reference Include="Hotcakes.Modules">
-      <HintPath>..\..\test\Test\References\Hotcakes.Modules.dll</HintPath>
+      <HintPath>D:\CORVINUS\github file\ApiSample_03.06.00\References\Hotcakes.Modules.dll</HintPath>
     </Reference>
     <Reference Include="Hotcakes.Payment">
-      <HintPath>..\..\test\Test\References\Hotcakes.Payment.dll</HintPath>
+      <HintPath>D:\CORVINUS\github file\ApiSample_03.06.00\References\Hotcakes.Payment.dll</HintPath>
     </Reference>
     <Reference Include="Hotcakes.Web">
-      <HintPath>..\..\test\Test\References\Hotcakes.Web.dll</HintPath>
+      <HintPath>D:\CORVINUS\github file\ApiSample_03.06.00\References\Hotcakes.Web.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
