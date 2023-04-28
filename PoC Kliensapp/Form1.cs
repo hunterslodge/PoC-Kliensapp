@@ -23,7 +23,12 @@ namespace PoC_Kliensapp
         public Form1()
         {
             InitializeComponent();
-            GetProducts();  
+            GetProducts();
+            // align headers to the middle of the DataGridView
+            foreach (DataGridViewColumn column in productDataGridView.Columns)
+            {
+                column.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
         }
 
         public void GetProducts()
@@ -47,18 +52,19 @@ namespace PoC_Kliensapp
             dt.Columns.Add("Bvin", typeof(string));
             dt.Columns.Add("Sku", typeof(string));
             dt.Columns.Add("ProductName", typeof(string));
-            dt.Columns.Add("SitePrice", typeof(long));
+            dt.Columns.Add("SitePrice", typeof(string));
             dt.Columns.Add("CreationDateUtc", typeof(DateTime));
 
 
             productDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             productDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            //productDataGridView.
+           
 
             foreach (ProductDTO item in deserializedResponse.Content)
             {
-                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice, item.CreationDateUtc);
+                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, $"{item.SitePrice} Ft", item.CreationDateUtc);
             }
+
             
             // save the selected row index and row count
             int selectedRowIndex = productDataGridView.CurrentRow != null ? productDataGridView.CurrentRow.Index : 0;
