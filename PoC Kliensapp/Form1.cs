@@ -53,7 +53,7 @@ namespace PoC_Kliensapp
 
             productDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             productDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-
+            //productDataGridView.
 
             foreach (ProductDTO item in deserializedResponse.Content)
             {
@@ -126,7 +126,7 @@ namespace PoC_Kliensapp
             var product = proxy.ProductsFind(productId).Content;
 
             // validate the input
-            if (string.IsNullOrEmpty(textBox1.Text) || decimal.Parse(textBox1.Text) == 0)
+            if (!decimal.TryParse(textBox1.Text, out decimal value) || value == 0)
             {
                 MessageBox.Show("Érvénytelen érték. Kérjük adjon meg egy nem 0 számot.");
                 return;
