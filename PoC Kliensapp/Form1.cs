@@ -52,6 +52,7 @@ namespace PoC_Kliensapp
 
 
             productDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            productDataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
 
 
             foreach (ProductDTO item in deserializedResponse.Content)
