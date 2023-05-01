@@ -1,0 +1,19 @@
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\bin\Debug\PoC Kliensapp.exe.config
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\bin\Debug\PoC Kliensapp.exe
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\bin\Debug\PoC Kliensapp.pdb
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\bin\Debug\System.Web.Mvc.dll
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\bin\Debug\System.Web.WebPages.dll
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\bin\Debug\System.Web.Razor.dll
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.AssemblyReference.cache
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.SuggestedBindingRedirects.cache
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.exe.config
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC_Kliensapp.Form1.resources
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC_Kliensapp.Properties.Resources.resources
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.GenerateResource.cache
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.CoreCompileInputs.cache
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.CopyComplete
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.exe
+C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.pdb

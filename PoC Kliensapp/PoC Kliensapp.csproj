@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="Hotcakes.Commerce">
       <HintPath>D:\CORVINUS\github file\ApiSample_03.06.00\References\Hotcakes.Commerce.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="Hotcakes.Commerce.Dnn">
       <HintPath>D:\CORVINUS\github file\ApiSample_03.06.00\References\Hotcakes.Commerce.Dnn.dll</HintPath>
