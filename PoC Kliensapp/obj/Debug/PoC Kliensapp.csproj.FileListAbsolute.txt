@@ -17,3 +17,39 @@ C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC K
 C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.CopyComplete
 C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.exe
 C:\Users\Nyomi\Desktop\RIP\3. fázis\PoC Kliensapp\PoC Kliensapp\obj\Debug\PoC Kliensapp.pdb
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\NUnit3.TestAdapter.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\NUnit3.TestAdapter.pdb
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\nunit.engine.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\nunit.engine.api.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\nunit.engine.core.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\testcentric.engine.metadata.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\PoC Kliensapp.exe.config
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\PoC Kliensapp.exe
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\PoC Kliensapp.pdb
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\Castle.Core.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\Moq.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\nunit.framework.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\System.Web.Mvc.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\System.Web.WebPages.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\System.Web.Razor.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\System.Web.WebPages.Razor.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\Castle.Core.xml
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\Moq.xml
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\nunit.framework.xml
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.AssemblyReference.cache
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.SuggestedBindingRedirects.cache
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC Kliensapp.exe.config
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC_Kliensapp.Form1.resources
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC_Kliensapp.Properties.Resources.resources
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.GenerateResource.cache
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.CoreCompileInputs.cache
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC Kliensapp.csproj.CopyComplete
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC Kliensapp.exe
+C:\Users\Gyurkó Attila\Desktop\suli\Tanórák\Rendszerfejlesztés és IT projektmenedzsment\unit2\PoC Kliensapp\obj\Debug\PoC Kliensapp.pdb
