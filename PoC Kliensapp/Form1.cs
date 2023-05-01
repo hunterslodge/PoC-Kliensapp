@@ -63,8 +63,8 @@ namespace PoC_Kliensapp
             {
                 dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, $"{item.SitePrice} Ft", item.CreationDateUtc);
             }
+           
 
-            
             // save the selected row index and row count
             int selectedRowIndex = productDataGridView.CurrentRow != null ? productDataGridView.CurrentRow.Index : 0;
             int rowCount = productDataGridView.Rows.Count;
