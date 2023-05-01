@@ -92,6 +92,23 @@ namespace PoC_Kliensapp
 
         private void Törlés_Click(object sender, EventArgs e)
         {
+            Törlés_fv();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Módosít();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Biztos", "Biztos", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
+        }
+        public void Törlés_fv()
+        {
             if (MessageBox.Show("Biztos", "Biztos", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 // get the current scrollbar position
@@ -112,12 +129,11 @@ namespace PoC_Kliensapp
 
                 // restore the scrollbar position and refresh the DataGridView
                 GetProducts();
-                
-            }
 
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void Módosít()
         {
             string url = "http://20.234.113.211:8095/";
             string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
@@ -125,7 +141,7 @@ namespace PoC_Kliensapp
             Api proxy = new Api(url, key);
 
             int rowIndex = productDataGridView.CurrentCell.RowIndex;
-            
+
             // get the ID of the selected product from the first column of the same row
             var productId = productDataGridView.Rows[rowIndex].Cells["Bvin"].Value.ToString();
 
@@ -138,8 +154,8 @@ namespace PoC_Kliensapp
                 MessageBox.Show("Érvénytelen érték. Kérjük adjon meg egy nem 0 számot.");
                 return;
             }
-            
-     
+
+
             // update the SitePrice property of the product
             product.SitePrice = decimal.Parse(textBox1.Text);
 
@@ -156,15 +172,6 @@ namespace PoC_Kliensapp
                     row.Selected = true;
                     break;
                 }
-            }
-            
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MessageBox.Show("Biztos", "Biztos", MessageBoxButtons.YesNo) == DialogResult.No)
-            {
-                e.Cancel = true;
             }
         }
     }
