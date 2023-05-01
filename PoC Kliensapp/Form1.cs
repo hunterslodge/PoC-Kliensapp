@@ -15,7 +15,7 @@ using Hotcakes.CommerceDTO.v1.Contacts;
 using Hotcakes.CommerceDTO.v1.Catalog;
 using Hotcakes.Web.Data;
 
-
+//Admin átal jóváhagyva
 namespace PoC_Kliensapp
 {
     public partial class Form1 : Form
