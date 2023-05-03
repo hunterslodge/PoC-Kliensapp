@@ -63,7 +63,7 @@ namespace PoC_Kliensapp
 
             foreach (ProductDTO item in deserializedResponse.Content)
             {
-                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, $"{item.SitePrice} Ft", item.CreationDateUtc);
+                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice.ToString("F0") + " Ft", item.CreationDateUtc);
             }
            
 
