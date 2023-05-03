@@ -63,7 +63,7 @@ namespace PoC_Kliensapp
 
             foreach (ProductDTO item in deserializedResponse.Content)
             {
-                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, $"{item.SitePrice} Ft", item.CreationDateUtc);
+                dt.Rows.Add(item.Bvin, item.Sku, item.ProductName, item.SitePrice.ToString("F0") + " Ft", item.CreationDateUtc);
             }
            
 
@@ -173,6 +173,27 @@ namespace PoC_Kliensapp
                     break;
                 }
             }
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            Search();
+        }
+        private void Search()
+        {
+            string url = "http://20.234.113.211:8095/";
+            string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
+
+            Api proxy = new Api(url, key);
+
+            ApiResponse<List<ProductDTO>> response = proxy.ProductsFindAll();
+            List<ProductDTO> productList = response.Content;
+
+            var query = from p in productList
+                        where p.ProductName.ToLower().Contains(textBox2.Text.ToLower())
+                        select new { p.Bvin, p.Sku, p.ProductName, SitePrice = p.SitePrice.ToString("F0") + " Ft", p.CreationDateUtc };
+
+            productDataGridView.DataSource = query.ToList();
         }
     }
 }
