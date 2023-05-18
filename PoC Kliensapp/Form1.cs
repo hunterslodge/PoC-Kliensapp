@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using Hotcakes.CommerceDTO.v1.Client;
 using Hotcakes.CommerceDTO.v1.Contacts;
 using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.CommerceDTO.v1.Orders;
 using Hotcakes.Web.Data;
 
 
@@ -29,7 +30,7 @@ namespace PoC_Kliensapp
                 column.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
         }
-
+       
         public void GetProducts()
         {
             // get the current scrollbar position
@@ -124,11 +125,78 @@ namespace PoC_Kliensapp
                 int selectedRowIndex = productDataGridView.CurrentRow.Index;
                 // get the productId from the first column of the selected row
                 var productId = productDataGridView.Rows[rowIndex].Cells[0].Value.ToString();
+                bool productFound = false;
 
-                ApiResponse<bool> response = proxy.ProductsDelete(productId);
+                /*
+                
+                ApiResponse<List<OrderSnapshotDTO>> response2 = proxy.OrdersFindAll();
+                List<string> bvins = response2.Content.Select(snapshot => snapshot.bvin).ToList();
+                */
+                foreach (OrderDTO orderDTO in allOrders)
+                {
+                    if (orderDTO.Items.Any(i => i.ProductId == productId) && orderDTO.StatusName != "Received")
+                    {
+                        MessageBox.Show("A kért termék nem törölhető, mert már benne van egy rendelésben");
+                        productFound = true;
+                        break;
+                    }
+                }
+                if (!productFound)
+                {
+                    ApiResponse<bool> response = proxy.ProductsDelete(productId);
+                    MessageBox.Show("A kért termék törölhető");
+                }
 
                 // restore the scrollbar position and refresh the DataGridView
                 GetProducts();
+
+
+
+
+                /*
+                ApiResponse<OrderDTO> orderResponse = proxy.OrdersFind("");
+                string json = JsonConvert.SerializeObject(orderResponse);
+
+                ApiResponse<OrderDTO> deserializedResponse = JsonConvert.DeserializeObject<ApiResponse<OrderDTO>>(json);
+                OrderDTO orderDTO = deserializedResponse.Content;
+
+                if (orderDTO != null)
+                {
+                    bool productFound = false; // Flag to track if the product is found in the order
+
+                    foreach (LineItemDTO lineItem in orderDTO.Items)
+                    {
+                        if (lineItem.ProductId == productId)
+                        {
+                            string orderBvin = orderDTO.Bvin;
+                            // Use the orderBvin for further processing
+                            // ...
+                            productFound = true;
+                            break;
+                        }
+                    }
+
+                    if (productFound)
+                    {
+                        MessageBox.Show("A kért termék nem törölhető, mert már benne van egy rendelésben");
+                    }
+                    else
+                    {
+                        ApiResponse<bool> response = proxy.ProductsDelete(productId);
+                        MessageBox.Show("A kért termék törölhető");
+                    }
+                }
+                */
+                /*
+                ApiResponse<bool> response = proxy.ProductsDelete(productId);
+                // restore the scrollbar position and refresh the DataGridView
+                GetProducts();
+                */
+
+
+
+
+
 
             }
         }
@@ -194,6 +262,40 @@ namespace PoC_Kliensapp
                         select new { p.Bvin, p.Sku, p.ProductName, SitePrice = p.SitePrice.ToString("F0") + " Ft", p.CreationDateUtc };
 
             productDataGridView.DataSource = query.ToList();
+        }
+        private List<OrderDTO> Feltölt(Api proxy)
+        {
+            DateTime startDate = new DateTime(2023, 3, 2);
+
+            ApiResponse<List<OrderSnapshotDTO>> response2 = proxy.OrdersFindAll();
+
+            List<string> bvins = response2.Content
+                .Where(snapshot => snapshot.TimeOfOrderUtc > startDate)
+                .Select(snapshot => snapshot.bvin)
+                .ToList();
+
+            
+
+            List<OrderDTO> allOrders = new List<OrderDTO>();
+
+            foreach (string bvin in bvins)
+            {
+                ApiResponse<OrderDTO> orderResponse = proxy.OrdersFind(bvin);
+                OrderDTO orderDTO = orderResponse.Content;
+                allOrders.Add(orderDTO);
+            }
+
+            return allOrders;
+        }
+        private List<OrderDTO> allOrders;
+       
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+            string url = "http://20.234.113.211:8095/";
+            string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
+
+            Api proxy = new Api(url, key);
+            allOrders = Feltölt(proxy);
         }
     }
 }
