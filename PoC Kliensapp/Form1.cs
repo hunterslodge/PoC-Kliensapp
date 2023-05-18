@@ -15,6 +15,7 @@ using Hotcakes.CommerceDTO.v1.Contacts;
 using Hotcakes.CommerceDTO.v1.Catalog;
 using Hotcakes.CommerceDTO.v1.Orders;
 using Hotcakes.Web.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace PoC_Kliensapp
@@ -263,39 +264,65 @@ namespace PoC_Kliensapp
 
             productDataGridView.DataSource = query.ToList();
         }
-        private List<OrderDTO> Feltölt(Api proxy)
+        private Task<List<OrderDTO>> FeltöltAsync(Api proxy, IProgress<int> progress)
         {
             DateTime startDate = new DateTime(2023, 3, 2);
 
-            ApiResponse<List<OrderSnapshotDTO>> response2 = proxy.OrdersFindAll();
-
-            List<string> bvins = response2.Content
-                .Where(snapshot => snapshot.TimeOfOrderUtc > startDate)
-                .Select(snapshot => snapshot.bvin)
-                .ToList();
-
-            
-
-            List<OrderDTO> allOrders = new List<OrderDTO>();
-
-            foreach (string bvin in bvins)
+            return Task.Run(() =>
             {
-                ApiResponse<OrderDTO> orderResponse = proxy.OrdersFind(bvin);
-                OrderDTO orderDTO = orderResponse.Content;
-                allOrders.Add(orderDTO);
-            }
+                ApiResponse<List<OrderSnapshotDTO>> response2 = proxy.OrdersFindAll();
 
-            return allOrders;
+                List<string> bvins = response2.Content
+                    .Where(snapshot => snapshot.TimeOfOrderUtc > startDate)
+                    .Select(snapshot => snapshot.bvin)
+                    .ToList();
+
+                List<OrderDTO> allOrders = new List<OrderDTO>();
+
+                for (int i = 0; i < bvins.Count; i++)
+                {
+                    ApiResponse<OrderDTO> orderResponse = proxy.OrdersFind(bvins[i]);
+                    OrderDTO orderDTO = orderResponse.Content;
+                    allOrders.Add(orderDTO);
+
+                    // Report progress
+                    int progressPercentage = (i + 1) * 100 / bvins.Count;
+                    progress.Report(progressPercentage);
+                }
+
+                return allOrders;
+            });
         }
+
         private List<OrderDTO> allOrders;
-       
-        private void Form1_Load_1(object sender, EventArgs e)
+
+        private async void Form1_Load_1(object sender, EventArgs e)
         {
             string url = "http://20.234.113.211:8095/";
             string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
 
             Api proxy = new Api(url, key);
-            allOrders = Feltölt(proxy);
+
+            // Update the label text to indicate loading
+            loadingLabel.Text = "Rendelések betöltése...";
+            progressBar.Style = ProgressBarStyle.Continuous;
+            progressBar.Value = 0;
+            progressBar.Visible = true;
+
+            // Use a Progress object to report progress updates
+            var progress = new Progress<int>(value =>
+            {
+                progressBar.Value = value;
+            });
+
+            // Load the orders asynchronously
+            allOrders = await FeltöltAsync(proxy, progress);
+
+            // Update the label text to indicate completion
+            loadingLabel.Text = "Rendelések sikeresen betöltve!";
+            progressBar.Visible = false;
         }
+
+
     }
 }
