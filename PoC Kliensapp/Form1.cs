@@ -244,19 +244,23 @@ namespace PoC_Kliensapp
             }
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private async void textBox2_TextChanged(object sender, EventArgs e)
         {
-            Search();
+            await SearchAsync();
         }
-        private void Search()
+
+        private async Task SearchAsync()
         {
             string url = "http://20.234.113.211:8095/";
             string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
 
             Api proxy = new Api(url, key);
 
-            ApiResponse<List<ProductDTO>> response = proxy.ProductsFindAll();
-            List<ProductDTO> productList = response.Content;
+            List<ProductDTO> productList = await Task.Run(() =>
+            {
+                ApiResponse<List<ProductDTO>> response = proxy.ProductsFindAll();
+                return response.Content;
+            });
 
             var query = from p in productList
                         where p.ProductName.ToLower().Contains(textBox2.Text.ToLower())
