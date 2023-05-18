@@ -313,6 +313,7 @@ namespace PoC_Kliensapp
             progressBar.Style = ProgressBarStyle.Continuous;
             progressBar.Value = 0;
             progressBar.Visible = true;
+            Törlés.Enabled= false;
 
             // Use a Progress object to report progress updates
             
@@ -327,6 +328,7 @@ namespace PoC_Kliensapp
             // Update the label text to indicate completion
             loadingLabel.Text = "Rendelések sikeresen betöltve!";
             progressBar.Visible = false;
+            Törlés.Enabled = true;
         }
 
 
