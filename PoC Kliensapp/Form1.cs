@@ -134,7 +134,7 @@ namespace PoC_Kliensapp
                 */
                 foreach (OrderDTO orderDTO in allOrders)
                 {
-                    if (orderDTO.Items.Any(i => i.ProductId == productId) && orderDTO.StatusName != "Received")
+                    if (orderDTO.Items.Any(i => i.ProductId == productId))
                     {
                         MessageBox.Show("A kért termék nem törölhető, mert már benne van egy rendelésben");
                         productFound = true;
