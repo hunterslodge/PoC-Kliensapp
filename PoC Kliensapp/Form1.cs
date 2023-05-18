@@ -264,6 +264,7 @@ namespace PoC_Kliensapp
 
             productDataGridView.DataSource = query.ToList();
         }
+        //aszinkronos futtatás
         private Task<List<OrderDTO>> FeltöltAsync(Api proxy, IProgress<int> progress)
         {
             DateTime startDate = new DateTime(2023, 3, 2);
@@ -310,6 +311,7 @@ namespace PoC_Kliensapp
             progressBar.Visible = true;
 
             // Use a Progress object to report progress updates
+            
             var progress = new Progress<int>(value =>
             {
                 progressBar.Value = value;
