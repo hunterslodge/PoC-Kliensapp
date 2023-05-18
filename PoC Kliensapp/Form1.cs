@@ -231,16 +231,31 @@ namespace PoC_Kliensapp
             // call the API to update the product
             ApiResponse<ProductDTO> response = proxy.ProductsUpdate(product);
             textBox1.Clear();
+
+            // Remember the vertical scroll position before refreshing the product list
+            int scrollPosition = productDataGridView.FirstDisplayedScrollingRowIndex;
+
+            // Refresh the product list
             GetProducts();
-            // find the edited row by the product ID
-            foreach (DataGridViewRow row in productDataGridView.Rows)
+            // Find the edited row by the product ID
+            int editedRowIndex = -1;
+            for (int i = 0; i < productDataGridView.Rows.Count; i++)
             {
-                if (row.Cells["Bvin"].Value.ToString() == productId)
+                if (productDataGridView.Rows[i].Cells["Bvin"].Value.ToString() == productId)
                 {
-                    // highlight the row
-                    row.Selected = true;
+                    editedRowIndex = i;
                     break;
                 }
+            }
+
+            // Highlight and select the modified row
+            if (editedRowIndex >= 0 && editedRowIndex < productDataGridView.Rows.Count)
+            {
+                productDataGridView.CurrentCell = productDataGridView.Rows[editedRowIndex].Cells[0];
+                productDataGridView.Rows[editedRowIndex].Selected = true;
+
+                // Set the vertical scroll position to the remembered value
+                productDataGridView.FirstDisplayedScrollingRowIndex = scrollPosition;
             }
         }
 
