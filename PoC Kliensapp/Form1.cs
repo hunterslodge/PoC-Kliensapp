@@ -269,8 +269,12 @@ namespace PoC_Kliensapp
             productDataGridView.DataSource = query.ToList();
         }
         //aszinkronos futtatás
-        private Task<List<OrderDTO>> FeltöltAsync(Api proxy, IProgress<int> progress)
+        private Task<List<OrderDTO>> FeltöltAsync( IProgress<int> progress)
         {
+            string url = "http://20.234.113.211:8095/";
+            string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
+
+            Api proxy = new Api(url, key);
             DateTime startDate = new DateTime(2023, 3, 2);
 
             return Task.Run(() =>
@@ -303,10 +307,7 @@ namespace PoC_Kliensapp
 
         private async void Form1_Load_1(object sender, EventArgs e)
         {
-            string url = "http://20.234.113.211:8095/";
-            string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
-
-            Api proxy = new Api(url, key);
+            
 
             // Update the label text to indicate loading
             loadingLabel.Text = "Rendelések betöltése...";
@@ -323,7 +324,7 @@ namespace PoC_Kliensapp
             });
 
             // Load the orders asynchronously
-            allOrders = await FeltöltAsync(proxy, progress);
+            allOrders = await FeltöltAsync(progress);
 
             // Update the label text to indicate completion
             loadingLabel.Text = "Rendelések sikeresen betöltve!";
