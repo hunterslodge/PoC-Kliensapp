@@ -278,7 +278,7 @@ namespace PoC_Kliensapp
                 ApiResponse<List<OrderSnapshotDTO>> response2 = proxy.OrdersFindAll();
 
                 List<string> bvins = response2.Content
-                    .Where(snapshot => snapshot.TimeOfOrderUtc > startDate)
+                    .Where(snapshot => snapshot.TimeOfOrderUtc > startDate && snapshot.StatusName != "")
                     .Select(snapshot => snapshot.bvin)
                     .ToList();
 
