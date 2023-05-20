@@ -13,7 +13,9 @@ using System.Windows.Forms;
 using Hotcakes.CommerceDTO.v1.Client;
 using Hotcakes.CommerceDTO.v1.Contacts;
 using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.CommerceDTO.v1.Orders;
 using Hotcakes.Web.Data;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 //Admin átal jóváhagyva
 namespace PoC_Kliensapp
@@ -29,7 +31,7 @@ namespace PoC_Kliensapp
                 column.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
         }
-
+       
         public void GetProducts()
         {
             // get the current scrollbar position
@@ -124,11 +126,78 @@ namespace PoC_Kliensapp
                 int selectedRowIndex = productDataGridView.CurrentRow.Index;
                 // get the productId from the first column of the selected row
                 var productId = productDataGridView.Rows[rowIndex].Cells[0].Value.ToString();
+                bool productFound = false;
 
-                ApiResponse<bool> response = proxy.ProductsDelete(productId);
+                /*
+                
+                ApiResponse<List<OrderSnapshotDTO>> response2 = proxy.OrdersFindAll();
+                List<string> bvins = response2.Content.Select(snapshot => snapshot.bvin).ToList();
+                */
+                foreach (OrderDTO orderDTO in allOrders)
+                {
+                    if (orderDTO.Items.Any(i => i.ProductId == productId) && orderDTO.StatusName != "Complete")
+                    {
+                        MessageBox.Show("A kért termék nem törölhető, mert már benne van egy rendelésben");
+                        productFound = true;
+                        break;
+                    }
+                }
+                if (!productFound)
+                {
+                    ApiResponse<bool> response = proxy.ProductsDelete(productId);
+                    MessageBox.Show("A kért termék törölhető");
+                }
 
                 // restore the scrollbar position and refresh the DataGridView
                 GetProducts();
+
+
+
+
+                /*
+                ApiResponse<OrderDTO> orderResponse = proxy.OrdersFind("");
+                string json = JsonConvert.SerializeObject(orderResponse);
+
+                ApiResponse<OrderDTO> deserializedResponse = JsonConvert.DeserializeObject<ApiResponse<OrderDTO>>(json);
+                OrderDTO orderDTO = deserializedResponse.Content;
+
+                if (orderDTO != null)
+                {
+                    bool productFound = false; // Flag to track if the product is found in the order
+
+                    foreach (LineItemDTO lineItem in orderDTO.Items)
+                    {
+                        if (lineItem.ProductId == productId)
+                        {
+                            string orderBvin = orderDTO.Bvin;
+                            // Use the orderBvin for further processing
+                            // ...
+                            productFound = true;
+                            break;
+                        }
+                    }
+
+                    if (productFound)
+                    {
+                        MessageBox.Show("A kért termék nem törölhető, mert már benne van egy rendelésben");
+                    }
+                    else
+                    {
+                        ApiResponse<bool> response = proxy.ProductsDelete(productId);
+                        MessageBox.Show("A kért termék törölhető");
+                    }
+                }
+                */
+                /*
+                ApiResponse<bool> response = proxy.ProductsDelete(productId);
+                // restore the scrollbar position and refresh the DataGridView
+                GetProducts();
+                */
+
+
+
+
+
 
             }
         }
@@ -162,17 +231,122 @@ namespace PoC_Kliensapp
             // call the API to update the product
             ApiResponse<ProductDTO> response = proxy.ProductsUpdate(product);
             textBox1.Clear();
+
+            // Remember the vertical scroll position before refreshing the product list
+            int scrollPosition = productDataGridView.FirstDisplayedScrollingRowIndex;
+
+            // Refresh the product list
             GetProducts();
-            // find the edited row by the product ID
-            foreach (DataGridViewRow row in productDataGridView.Rows)
+            // Find the edited row by the product ID
+            int editedRowIndex = -1;
+            for (int i = 0; i < productDataGridView.Rows.Count; i++)
             {
-                if (row.Cells["Bvin"].Value.ToString() == productId)
+                if (productDataGridView.Rows[i].Cells["Bvin"].Value.ToString() == productId)
                 {
-                    // highlight the row
-                    row.Selected = true;
+                    editedRowIndex = i;
                     break;
                 }
             }
+
+            // Highlight and select the modified row
+            if (editedRowIndex >= 0 && editedRowIndex < productDataGridView.Rows.Count)
+            {
+                productDataGridView.CurrentCell = productDataGridView.Rows[editedRowIndex].Cells[0];
+                productDataGridView.Rows[editedRowIndex].Selected = true;
+
+                // Set the vertical scroll position to the remembered value
+                productDataGridView.FirstDisplayedScrollingRowIndex = scrollPosition;
+            }
         }
+
+        private async void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            await SearchAsync();
+        }
+
+        private async Task SearchAsync()
+        {
+            string url = "http://20.234.113.211:8095/";
+            string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
+
+            Api proxy = new Api(url, key);
+
+            List<ProductDTO> productList = await Task.Run(() =>
+            {
+                ApiResponse<List<ProductDTO>> response = proxy.ProductsFindAll();
+                return response.Content;
+            });
+
+            var query = from p in productList
+                        where p.ProductName.ToLower().Contains(textBox2.Text.ToLower())
+                        select new { p.Bvin, p.Sku, p.ProductName, SitePrice = p.SitePrice.ToString("F0") + " Ft", p.CreationDateUtc };
+
+            productDataGridView.DataSource = query.ToList();
+        }
+        //aszinkronos futtatás
+        private Task<List<OrderDTO>> FeltöltAsync( IProgress<int> progress)
+        {
+            string url = "http://20.234.113.211:8095/";
+            string key = "1-be27b88a-de65-48f3-9d66-fea7e3179d36";
+
+            Api proxy = new Api(url, key);
+            DateTime startDate = new DateTime(2023, 3, 2);
+
+            return Task.Run(() =>
+            {
+                ApiResponse<List<OrderSnapshotDTO>> response2 = proxy.OrdersFindAll();
+
+                List<string> bvins = response2.Content
+                    .Where(snapshot => snapshot.TimeOfOrderUtc > startDate && snapshot.StatusName != "")
+                    .Select(snapshot => snapshot.bvin)
+                    .ToList();
+
+                List<OrderDTO> allOrders = new List<OrderDTO>();
+
+                for (int i = 0; i < bvins.Count; i++)
+                {
+                    ApiResponse<OrderDTO> orderResponse = proxy.OrdersFind(bvins[i]);
+                    OrderDTO orderDTO = orderResponse.Content;
+                    allOrders.Add(orderDTO);
+
+                    // Report progress
+                    int progressPercentage = (i + 1) * 100 / bvins.Count;
+                    progress.Report(progressPercentage);
+                }
+
+                return allOrders;
+            });
+        }
+
+        private List<OrderDTO> allOrders;
+
+        private async void Form1_Load_1(object sender, EventArgs e)
+        {
+            
+
+            // Update the label text to indicate loading
+            loadingLabel.Text = "Rendelések betöltése...";
+            progressBar.Style = ProgressBarStyle.Continuous;
+            progressBar.Value = 0;
+            progressBar.Visible = true;
+            Törlés.Enabled= false;
+
+            // Use a Progress object to report progress updates
+            
+            var progress = new Progress<int>(value =>
+            {
+                progressBar.Value = value;
+            });
+
+            // Load the orders asynchronously
+            allOrders = await FeltöltAsync(progress);
+
+            // Update the label text to indicate completion
+            loadingLabel.Text = "Rendelések sikeresen betöltve!";
+            progressBar.Visible = false;
+            Törlés.Enabled = true;
+        }
+
+
     }
 }
