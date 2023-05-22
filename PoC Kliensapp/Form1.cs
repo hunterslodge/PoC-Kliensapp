@@ -310,7 +310,8 @@ namespace PoC_Kliensapp
                     allOrders.Add(orderDTO);
 
                     // Report progress
-                    int progressPercentage = (i + 1) * 100 / bvins.Count;
+                    int progressPercentage = (i + 1) * 100 / Math.Max(bvins.Count, 1);
+
                     progress.Report(progressPercentage);
                 }
 
